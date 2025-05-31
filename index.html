@@ -43,12 +43,13 @@
     const totalTimeDisplay = document.getElementById("totalTime");
 
     function formatTime(ms) {
-      const totalSeconds = Math.floor(ms / 1000);
-      const h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
-      const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
-      const s = String(totalSeconds % 60).padStart(2, '0');
-      return `${h}:${m}:${s}`;
-    }
+  const totalSeconds = Math.floor(ms / 1000);
+  const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+  const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+  const seconds = String(totalSeconds % 60).padStart(2, '0');
+  const milliseconds = String(ms % 1000).padStart(3, '0');
+  return `${hours}:${minutes}:${seconds}:${milliseconds}`;
+}
 
     startBtn.addEventListener("click", () => {
       startTime = Date.now();
@@ -61,10 +62,9 @@
       stopBtn.disabled = false;
 
       timerInterval = setInterval(() => {
-        const elapsed = Date.now() - startTime;
-        timerDisplay.textContent = formatTime(elapsed);
-      }, 500);
-    });
+  const elapsed = Date.now() - startTime;
+  timerDisplay.textContent = formatTime(elapsed);
+}, 50); // 50 ms hassasiyetle çalışır
 
     lapBtn.addEventListener("click", () => {
       const now = Date.now();
